@@ -45,7 +45,7 @@ public class Main extends JPanel {
     
     /**
      * Create all elements in the scene
-     * Could be read from a text file
+     * Could be read from a text filetatus
      */
     public void createScene() {
         AmbientLight al = new AmbientLight(new Colour(.2, .2, .2));
@@ -55,55 +55,47 @@ public class Main extends JPanel {
         //PointLight pl1 = new PointLight(new Point(0, 30, -110), new Colour(1, 1, 1));
         //Scene.addPointLight(pl1);
         Scene.addPointLight(pl1);
-        
-        // Read a texture
-        //Texture texture = new Texture("madera.ppm");
+
+        double Ko = 0.7;          // Weight of this object's color
+        double Kr = 0.3;          // Weight of the reflected color
+        double Kt = 0;          // Weight of the refracted color
+
+        // Sphere 1
         Texture texture1 = new Texture("earth.ppm");
-        
-        // A yellow reflective sphere
-        /*
-        double Ka = .2;        // ambient
-        double Kd = .8;        // difuse
-        double Ks = .7;          // specular
-        int n = 32;
-        */
         double Ka1 = .2;        // ambient
         double Kd1 = .8;        // difuse
         double Ks1 = .7;          // specular
         int n1 = 32;
-        
         Colour color = new Colour(1, 0, 0);     // object's color
-        double Ko = 0.7;          // Weight of this object's color
-        double Kr = 0.3;          // Weight of the reflected color
-        double Kt = 0;          // Weight of the refracted color
-        //Material material1 = new Material(Ka, Kd, Ks, n, color, Ko, Kr, Kt, texture1);
-        Material material1 = new Material(Ka1, Kd1, Ks1, n1, color, Ko, Kr, Kt, null);
-        
+        Material material1 = new Material(Ka1, Kd1, Ks1, n1, color, Ko, Kr, Kt, texture1);
         Sphere sp1 = new Sphere(new Point(-20, 0, -200), 20, material1);
         Scene.addIntersectable(sp1);
-        
+
+        // Sphere 2
         Texture texture2 = new Texture("madera.ppm");
-        //Material material2 = new Material(Ka, Kd, Ks, n, color, Ko, Kr, Kt, texture2);
         double Ka2 = .2;        // ambient
         double Kd2 = .8;        // difuse
         double Ks2 = .7;          // specular
         int n2 = 64;
         Colour color2 = new Colour(0, 0, 1);
         Material material2 = new Material(Ka2, Kd2, Ks2, n2, color2, Ko, Kr, Kt, texture2);
-        
         Sphere sp2 = new Sphere(new Point(20, 0, -200), 20, material2);
         Scene.addIntersectable(sp2);
-        
+
+        // Triangle
+        Texture texture3 = new Texture("earth.ppm");
+        double Ka3 = .2;        // ambient
+        double Kd3 = .8;        // difuse
+        double Ks3 = .7;          // specular
+        int n3 = 64;
         Colour color3 = new Colour(0, 1, 0);
-        Material material3 = new Material(Ka2, Kd2, Ks2, n2, color3, Ko, Kr, Kt, null);
+        Material material3 = new Material(Ka3, Kd3, Ks3, n3, color3, Ko, Kr, Kt, texture3);
         Point p1 = new Point(-30, 20, -200);
         Point p2 = new Point( 30, 20, -200);
         Point p3 = new Point(  0, 50, -200);
-        Triangle triangle1 = new Triangle(p1, p2, p3, material3);
-        Scene.addIntersectable(triangle1);
+        Triangle triangle = new Triangle(p1, p2, p3, material3);
+        Scene.addIntersectable(triangle);
 
-        
-        
     }
     
     @Override

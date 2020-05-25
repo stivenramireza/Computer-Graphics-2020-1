@@ -37,6 +37,9 @@ public class Triangle implements Intersectable {
     /** Material of the triangle */
     Material material;
 
+    double beta;
+    double gamma;
+
     /**
      * Construct a Triangle given the three vertices that form it.
      * @param v1 first vertex
@@ -85,8 +88,8 @@ public class Triangle implements Intersectable {
         double[] results = equation.computeSystem();
 
         double S = results[0];
-        double beta = results[1];
-        double gamma = results[2];
+        beta = results[1];
+        gamma = results[2];
         double alpha = 1 - beta - gamma;
     
         if ((alpha > 0 && alpha < 1) && (beta > 0 && beta < 1) && (gamma > 0 && gamma < 1)) {
@@ -135,7 +138,7 @@ public class Triangle implements Intersectable {
     }
     
      public UVCoordinates computeUV(Point p) {
-        return new UVCoordinates(0, 0);
+        return new UVCoordinates(beta, gamma);
         
     }
 
